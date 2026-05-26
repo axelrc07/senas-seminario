@@ -1,0 +1,383 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+
+/* ─── Design tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --neon: #00ff88;
+  --neon-dim: #00cc6a;
+  --neon-glow: rgba(0, 255, 136, 0.25);
+  --bg-base: #0a0a0f;
+  --bg-card: #111118;
+  --bg-card-hover: #16161f;
+  --bg-panel: #0d0d14;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-neon: rgba(0, 255, 136, 0.35);
+  --text-primary: #f0f0f8;
+  --text-secondary: #8888aa;
+  --text-muted: #555570;
+  --danger: #ff4466;
+  --warning: #ffaa00;
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--neon-dim); }
+
+/* ─── Glow utilities ─────────────────────────────────────────────────────────── */
+.glow-text {
+  text-shadow: 0 0 30px var(--neon-glow), 0 0 60px rgba(0,255,136,0.15);
+}
+
+.glow-box {
+  box-shadow: 0 0 20px var(--neon-glow), 0 0 60px rgba(0,255,136,0.05);
+}
+
+.glow-border {
+  border: 1px solid var(--border-neon);
+  box-shadow: 0 0 15px var(--neon-glow) inset, 0 0 20px var(--neon-glow);
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-neon);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,255,136,0.08);
+}
+
+.card-learned {
+  background: rgba(0, 255, 136, 0.05);
+  border-color: var(--border-neon);
+  box-shadow: 0 0 20px rgba(0,255,136,0.08);
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, var(--neon), #00ddaa);
+  color: #000;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,255,136,0.4);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--neon);
+  border: 1px solid var(--border-neon);
+  border-radius: 12px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background: rgba(0,255,136,0.08);
+  box-shadow: 0 0 20px var(--neon-glow);
+}
+
+/* ─── Confidence bar ─────────────────────────────────────────────────────────── */
+.confidence-bar-track {
+  height: 8px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.confidence-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--neon-dim), var(--neon));
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px var(--neon-glow);
+}
+
+/* ─── Progress bar ───────────────────────────────────────────────────────────── */
+.progress-bar-track {
+  height: 10px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-dim), var(--neon));
+  border-radius: 5px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px var(--neon-glow);
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-neon {
+  0%, 100% { box-shadow: 0 0 10px var(--neon-glow); }
+  50%       { box-shadow: 0 0 30px var(--neon-glow), 0 0 60px rgba(0,255,136,0.15); }
+}
+
+@keyframes correctBounce {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.15); }
+  60%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-6px); }
+  80%      { transform: translateX(6px); }
+}
+
+@keyframes scanline {
+  0%   { top: -4px; }
+  100% { top: 100%; }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+.animate-correct { animation: correctBounce 0.5s ease; }
+.animate-wrong   { animation: wrongShake 0.4s ease; }
+.animate-pulse-neon { animation: pulse-neon 2s ease infinite; }
+
+/* ─── Webcam panel ───────────────────────────────────────────────────────────── */
+.webcam-container {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+}
+
+.webcam-container::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  animation: scanline 3s linear infinite;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.webcam-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Corner brackets */
+.webcam-corner {
+  position: absolute;
+  width: 24px; height: 24px;
+  border-color: var(--neon);
+  border-style: solid;
+  opacity: 0.8;
+}
+.webcam-corner.tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+.webcam-corner.tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+.webcam-corner.bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
+.webcam-corner.br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+/* ─── Letter badge ───────────────────────────────────────────────────────────── */
+.letter-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--neon), #00ddaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Navbar ─────────────────────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  height: 64px;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+
+.nav-link.active {
+  color: var(--neon);
+  background: rgba(0,255,136,0.08);
+}
+
+/* ─── Hero gradient ──────────────────────────────────────────────────────────── */
+.hero-gradient {
+  background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(0,255,136,0.12) 0%, transparent 70%);
+}
+
+/* ─── Grid letter card ───────────────────────────────────────────────────────── */
+.letter-card {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 14px;
+  transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  user-select: none;
+}
+
+.letter-card:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--border-neon);
+  box-shadow: 0 12px 40px rgba(0,255,136,0.1);
+}
+
+.letter-card.selected {
+  border-color: var(--neon);
+  box-shadow: 0 0 0 2px var(--neon), 0 12px 40px rgba(0,255,136,0.2);
+  background: rgba(0,255,136,0.05);
+}
+
+.letter-card.learned {
+  background: rgba(0,255,136,0.06);
+  border-color: rgba(0,255,136,0.3);
+}
+
+/* ─── Side panel ─────────────────────────────────────────────────────────────── */
+.side-panel {
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
+  height: 100%;
+  overflow-y: auto;
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(40px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* ─── Stat card ──────────────────────────────────────────────────────────────── */
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--border-neon);
+  box-shadow: 0 4px 20px rgba(0,255,136,0.06);
+}
+
+/* ─── Quiz letter display ────────────────────────────────────────────────────── */
+.quiz-letter {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(120px, 20vw, 200px);
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, #ffffff 0%, var(--neon) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(0,255,136,0.3));
+  animation: pulse-neon 3s ease infinite;
+}
+
+/* ─── Detection badge ────────────────────────────────────────────────────────── */
+.detection-display {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 24px;
+  text-align: center;
+}
+
+.detected-letter {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ─── Streak badge ───────────────────────────────────────────────────────────── */
+.streak-badge {
+  background: linear-gradient(135deg, rgba(255,170,0,0.15), rgba(255,200,0,0.05));
+  border: 1px solid rgba(255,170,0,0.3);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--warning);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
