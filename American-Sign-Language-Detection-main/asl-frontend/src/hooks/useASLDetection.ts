@@ -6,7 +6,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 
-const API_URL = 'http://localhost:3001/predict'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/predict'
 const INTERVAL_MS = 500
 
 export interface DetectionResult {

@@ -1,0 +1,9 @@
+{
+  "git": {
+    "LFS": false
+  },
+  "installCommand": "cd asl-frontend && npm install",
+  "buildCommand": "cd asl-frontend && npm run build",
+  "outputDirectory": "asl-frontend/dist",
+  "framework": "vite"
+}
